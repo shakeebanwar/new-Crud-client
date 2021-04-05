@@ -1,0 +1,126 @@
+{% extends "overview/base_setup_flow.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {#    TODO: adjust in flow and in content to user registration#}
+    <div class="div-top-margin-50">
+        <div class="row justify-content-center">
+            <div class="col-md-10 text-center">
+                <div>
+                    <div class="row justify-content-center align-middle">
+                        <div class="icon-square">
+                            <i class="bi bi-house-door-fill"></i>
+                        </div>
+                    </div>
+                    <header class="border-bottom pb-4 mb-4 form-heading">Set up your offices</header>
+                    <div class="form-text mb-4">Hi {{ request.user.first_name }}, please add your physical office spaces
+                        below. <br>
+                        <small>You don't have to add a Home Office for your organization, Floq already did 🐑</small>
+                    </div>
+                </div>
+
+                <div class="content-section">
+
+                    <form class="form-signin office-setup-formset-container" method="post">
+                        {% csrf_token %}
+                        {{ office_setup_formset.management_form }}
+                        {% for form in office_setup_formset %}
+
+                            <div class="office-setup-formsetaaaa">
+                                <div class="row">
+                                    <div class="col .office-setup-formset">
+                                        <label for="OfficeName">Office Name</label>
+                                        {{ form.office_name }}
+                                        {#                                <input type="text" name="office_name" id="OfficeName" class="form-control"#}
+                                        {#                                       placeholder="Office Name" required autofocus>#}
+
+                                    </div>
+                                    <div class="col">
+                                        {#                                todo: later we can implement#}
+                                        {#                                https://developers.google.com/maps/documentation/places/web-service/autocomplete?hl=de#}
+                                        <label for="OfficeLocation">Office Location</label>
+                                        {{ form.office_location }}
+                                    </div>
+                                    <div class="col">
+                                        <label for="OfficeCapacity">Office Capacity</label>
+                                        {{ form.office_capacity }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                        {#                        <button id="add-row-to-office-setup-formset" class="btn btn-primary" type="button">+</button>#}
+                        <button class="btn btn-lg btn-primary btn-block mb-2 mt-4" type="submit">Next</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div-top-margin-50">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-4">
+                            <small>
+                                1. Organization Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small style="font-weight: bold">
+                                2. Office Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small>
+                                3. Team invitation
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+
+    <script>
+        {# This small code allows the dropdown in organization_profile.hmtl go from 1 to 100       #}
+        $(function () {
+            var $select = $(".1-100");
+            for (i = 1; i <= 100; i++) {
+                $select.append($('<option></option>').val(i).html(i))
+            }
+
+        });
+
+        // https://www.brennantymrak.com/articles/django-dynamic-formsets-javascript
+        let OfficeSetupFormset = document.querySelectorAll(".office-setup-formset")
+        let container = document.querySelector("#office-setup-formset-container")
+        let addButton = document.querySelector("#add-row-to-office-setup-formset")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+        let formNum = OfficeSetupFormset.length - 1
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e) {
+            e.preventDefault()
+
+            let newForm = OfficeSetupFormset[0].cloneNode(true) //Clone the bird form
+            let formRegex = RegExp(`form-(\\d){1}-`, 'g') //Regex to find all instances of the form number
+
+            formNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`) //Update the new form to have the correct form number
+            container.insertBefore(newForm, addButton) //Insert the new form at the end of the list of forms
+
+            totalForms.setAttribute('value', `${formNum + 1}`) //Increment the number of total forms in the management form
+        }
+
+    </script>
+
+{% endblock script %}

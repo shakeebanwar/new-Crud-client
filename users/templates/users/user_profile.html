@@ -1,0 +1,71 @@
+{% extends "overview/../../../overview/templates/overview/../../../overview/templates/overview/base_general.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="introducing-row">
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <div class="content-section">
+                    <form class="form-signin" method="post">{% csrf_token %}
+
+
+                        <h1 class="h3 mb-3 font-weight-normal">📒</h1>
+                        <h1 class="h3 mb-3 font-weight-normal">Account</h1>
+
+                        <label for="inputEmail">Email</label>
+                        <input style="margin-bottom: 10px" type="email" name="email" id="inputEmail"
+                               class="form-control"
+                               placeholder="Email address" required value={{ user_form.initial.email }}>
+
+                        <label for="inputFirstName">First Name</label>
+                        <input style="margin-bottom: 10px" type="text" name="fist_name" id="inputFirstName"
+                               class="form-control"
+                               placeholder="First Name" required value={{ user_form.initial.first_name }}>
+
+                        <label for="inputLastName">Last Name</label>
+                        <input style="margin-bottom: 30px" type="text" name="last_name" id="inputLastName"
+                               class="form-control"
+                               placeholder="Last name" required value={{ user_form.initial.last_name }}>
+
+                        {% for field in user_forms %}
+                            <p>
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+
+                        {% if user_form.non_field_errors %}
+                            <div style="color: red">
+                                <p>{{ user_form.non_field_errors }}</p>
+                            </div>
+                        {% endif %}
+
+                        {% if success_message %}
+                            <p style="color:green; text-align: center;">{{ success_message }}</p>
+                        {% endif %}
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
+
+                    </form>
+
+                    <div class="d-flex flex-column">
+                        {#    TODO: fix change password#}
+                        <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    <div class="content-section">#}
+    {#      <div class="media">#}
+    {#        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">#}
+    {#        <div class="media-body">#}
+    {#          <h2 class="account-heading">{{ user.username }}</h2>#}
+    {#          <p class="text-secondary">{{ user.email }}</p>#}
+    {#        </div>#}
+    {#      </div>#}
+    {#      <!-- TODO: add a suitable form link to organization and implement roles-->#}
+    {#    </div>#}
+{% endblock content %}

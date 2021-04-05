@@ -1,0 +1,97 @@
+{% extends "overview/base_general.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="contaier mt-4" style="margin-top:70px !important;">
+        <div class="text-center mb-4">
+            <h3>Set up your workspace</h3>
+        </div>
+        <div class="col-md-11 col-lg-10 col-xs-12 mx-auto">
+          <form action="/office_setup/" method="POST">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <div class="col-md-1"></div>
+              <div class="col-md-4">Name</div>
+              <div class="col-md-3">Location</div>
+              <div class="col-md-2">Capacity</div>
+             
+              <div class="col-md-2">Utilization</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-1 text-right p-0 m-0">#1</div>
+              <div class="col-md-4"><input type="text" name="name" class="form-control c-form-radius" placeholder="Name your office or an area"></div>
+              <div class="col-md-3">    
+             
+                  <input type="text" name="location" class="form-control c-form-radius" placeholder="Location of your office">
+                </div>
+              <div class="col-md-2">
+               <select class="form-control c-form-radius" name="capacity">
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+              
+               </select>
+              </div>
+             
+              <div class="col-md-1">  
+                <input type="text" name="Utilization" class="form-control c-form-radius" placeholder="1-100%">
+              </div>
+               
+            </div>
+             
+            <div id="allform"></div>
+            <button type="button" class="btn c-btn-default" id="appendoffice"><i class="fa fa-plus"></i> Add Office</button>
+            <div class="form-group text-center">
+              <button class="btn btn-primary c-btn-size">Save</button><br>
+              <!-- <button class="btn c-btn-default">Back</button> -->
+            </div>
+          </form>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+  var x=2;
+  $(document).ready(function (){
+    $('#appendoffice').click(function(){
+       $('#allform').append(`
+       <div class="row mb-2" id="box${x}">
+              <div class="col-md-1 text-right p-0 m-0">#${x}</div>
+              <div class="col-md-4"><input type="text" name="name" class="form-control c-form-radius" placeholder="Name your office or an area"></div>
+              <div class="col-md-3">    
+             
+                  <input type="text" name="location" class="form-control c-form-radius" placeholder="Location of your office">
+                </div>
+              <div class="col-md-2">
+               <select class="form-control c-form-radius" name="capacity">
+                   <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+               </select>
+              </div>
+             
+              <div class="col-md-1">  
+                <input type="text" name="Utilization" class="form-control c-form-radius" placeholder="1-100%"></div>
+                <div class="col-md-1">  
+                  <button type="button" class="btn del-btn" onclick="delbox('box${x}')">X</button>
+              </div>
+            </div>
+       `);
+       ++x;
+    });
+
+    
+  });
+  // delete row
+  const  delbox=(id)=>{
+      $(`#${id}`).remove(); 
+    
+  }
+</script>
+{% endblock script %}

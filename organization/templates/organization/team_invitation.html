@@ -1,0 +1,57 @@
+{% extends "overview/base_general.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="introducing-row">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <div class="content-section">
+                    <form class="form-signin" method="post">{% csrf_token %}
+
+                        <h1 class="h3 mb-3 font-weight-normal">🦸✉️🦸‍♂️</h1>
+                        <h1 class="h3 mb-3 font-weight-normal">(3/3) Invite Your Organization or Team</h1>
+                        {#                        TODO: Team Invitation Mail with email that gets send to the indicated people as well as magic link if possible#}
+                        <div class="row">
+                            <div class="col">
+                                <label for="inputFirstName">First Name</label>
+                                <input type="text" name="first_name" id="inputFirstName" class="form-control"
+                                       placeholder="Office Location" required autofocus>
+                            </div>
+                            <div class="col">
+                                <label for="inputLastName">Last Name</label>
+                                <input type="text" name="last_name" id="inputLastName" class="form-control"
+                                       placeholder="Office Location" required>
+                            </div>
+                            <div class="col">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" name="email" id="inputEmail" class="form-control"
+                                       placeholder="Office Location" required>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary" type="submit">Start using Floq</button>
+
+                </div>
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-4">
+                            <small>
+                                1. Organization Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small>
+                                2. Office Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small style="font-weight: bold">
+                                3. Team invitation
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

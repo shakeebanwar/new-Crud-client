@@ -1,0 +1,60 @@
+{% extends "overview/base_general.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {#    TODO: adjust in flow and in content to user registration#}
+    <div class="introducing-row">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <div class="content-section">
+                    <form action="." class="form-signin" method="post">
+                        {% csrf_token %}
+                        <h1 class="h3 mb-3 font-weight-normal">🏢⚙️</h1>
+                        <h1 class="h3 mb-3 font-weight-normal">(1/3) Organization Setup</h1>
+                        <p class="">Hi {{ request.user.first_name }},<br> please set up a new organization for your team
+                            or company</p>
+                        <div class="row">
+                            <div class="col">
+                                <label for="OrganizationName">Name of your Organization</label>
+                                <input type="text" name="organization_name" id="OrganizationName" class="form-control"
+                                       placeholder="Organization Name" required autofocus>
+                            </div>
+                        </div>
+
+                        {% for field in organization_setup_form %}
+                            <p>
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+
+                        <button class="btn btn-lg btn-primary" type="submit">Next</button>
+
+                </div>
+                <div class="container-fluid">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-md-4">
+                            <small style="font-weight: bold">
+                                1. Organization Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small>
+                                2. Office Setup
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <small>
+                                3. Team invitation
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock content %}

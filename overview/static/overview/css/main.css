@@ -1,0 +1,730 @@
+
+/* General */
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    margin-bottom: 10px !important;
+}
+
+.input-bottom {
+    margin-bottom: 50px !important;
+}
+
+/*===========================================================================*/
+/* Navigation Bar */
+/*===========================================================================*/
+
+.nav {
+    margin-top: 20px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+}
+
+.nav-link {
+    color: #1e1e24;
+}
+
+/* For the nav bar on the settings page */
+
+.div-nab-tab {
+    min-width: max-content;
+}
+
+.nav-settings { /* NEW FROM PATRICK */
+    color: #3B3D3F;
+}
+
+.nav-settings:hover { /* NEW FROM PATRICK */
+    color: #3C4EF5 !important;
+}
+
+.nav-item{ /* NEW FROM PATRICK */
+    min-width: max-content;
+}
+
+#nav-active { /* NEW FROM PATRICK */
+    color: #3C4EF5;
+}
+
+.btn-primary {
+    background-color: #3C4EF5 !important;
+    border-color: #3C4EF5 !important;
+    vertical-align: middle !important;
+    min-width: 200px;
+    min-height: 20px;
+    font-size: 14px;
+}
+
+/*===========================================================================*/
+/* FONTS */
+/*===========================================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background: #fff;
+    color: #6C6E71;
+}
+
+p {
+    justify-content: center;
+    align-content: center;
+    font-family: 'Inter';
+    color: #6C6E71;
+    font-weight: 500;
+}
+
+h1 {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 55px;
+    margin-top: 5px;
+    color: #1E1E24;
+}
+
+small {
+    line-height: 10px;
+    margin-bottom: 10px;
+}
+
+/*===========================================================================*/
+/* index.html */
+/*===========================================================================*/
+
+.introducing-row {
+    margin-top: 100px;
+    color: #1E1E24;
+    font-weight: bold;
+}
+
+.description-text {
+    margin-top: 15px;
+}
+
+
+.button-waitlist {
+    margin-top: 50px;
+}
+
+/*===========================================================================*/
+/* LOGIN */
+/*===========================================================================*/
+
+
+/* Div-top-margin-100 is used in all login/logout/setup/settings pages */
+.div-top-margin-100 { /* NEW FROM PATRICK */
+    margin-top: 100px;
+}
+
+.div-top-margin-50 { /* NEW FROM PATRICK */
+    margin-top: 50px;
+}
+
+.div-top-margin-25 { /* NEW FROM PATRICK */
+    margin-top: 25px;
+}
+
+.icon-square { /* NEW FROM PATRICK */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    border-radius: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: #D7EEE2;
+    color: #62BE91;
+    font-size: 28px;
+}
+
+.i-blue {
+    background-color:#CCD2FF;
+    color: #374FFF;
+}
+
+.i-red {
+    background-color:#F9CDD6;
+    color: #EC3D5E;
+}
+
+/* padding between small icon and text */
+.i-nav { /* NEW FROM PATRICK */
+    padding-right: 7px;
+}
+
+.form-heading { /* NEW FROM PATRICK */
+    color: #3B3D3F;
+    font-weight: 500;
+    font-size: 24px;
+}
+.form-padding { /* NEW FROM PATRICK */
+    padding-left: 0.5%;
+    padding-right: 0.5%;
+}
+
+.form-text {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.form-subtitle { /* NEW FROM PATRICK */
+    color: #6C6E71;
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.form-label { /* NEW FROM PATRICK */
+    color: #6C6E71;
+    font-size: 12px;
+    text-align: left;
+}
+
+.form-block { /* NEW FROM PATRICK */
+    font-size: 14px;
+    min-width: max-content;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #ced4da !important;
+            opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #ced4da;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+            color: #ced4da;
+ }
+
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 10;
+    height: 1px
+}
+
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0
+}
+
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
+}
+
+.g-signin2 {
+    width: 100%;
+}
+
+.g-signin2 > div {
+    margin: 0 auto;
+}
+
+.forgot-password {
+    font-size: 6px;
+}
+
+/*===========================================================================*/
+/*  OVERVIEW */
+/*===========================================================================*/
+
+
+/*TODO fix those css thingies so that the background is right*/
+small.home-office-user-element {
+    background-color: #D4EEE2;
+    border-radius: 25px;
+}
+
+small.office-user-element {
+    background-color: #d1dfed;
+    border-radius: 25px;
+}
+
+small.not-indicated-user-element {
+    background-color: #FBE6A2;
+    border-radius: 25px;
+}
+
+p.office-name {
+    margin-bottom: 0px;
+}
+
+
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+::selection {
+    color: white;
+    background: #9AA6FF;
+}
+
+::-webkit-selection {
+    color: white;
+    background: #3C4EF5;
+}
+
+::-moz-selection {
+    color: white;
+    background: #3C4EF5;
+}
+
+.scrolltotop {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px 20px 0 0;
+    background: rgba(0, 0, 0, .5);
+    display: block;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 22px;
+    color: #ffffff;
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    display: none;
+    transition: 0.2s all ease;
+    -webkit-transition: 0.2s all ease;
+    -moz-transition: 0.2s all ease;
+}
+
+.scrolltotop:hover {
+    background: #000;
+    color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+}
+
+.container-fluid {
+    padding-left: 0px;
+}
+
+.main-content {
+    border-top: 1px solid #ddd !important;
+}
+
+/* OVERVIEW SIDEBAR LEFT  */
+
+.left-side {
+    padding-left: 30px !important;
+    padding-right: 40px;
+    border-right: 1px solid #ddd;
+    /*padding-right: 5px !important;*/
+}
+
+
+.left-sidebar .find-someone {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.left-sidebar .find-someone input {
+    background-color: #F5F6F7!important;
+    border: 1px solid rgba(67, 90, 111, 0.14);
+    box-sizing: border-box;
+    border-radius: 7px;
+    display: inline-block;
+    Width: 192px;
+    padding: 7px 20px;
+    background: url('../img/search-icon.png');
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-position: top 10px left 3px;
+    display: block;
+    width: 100%;
+    padding-left: 35px;
+}
+
+.left-sidebar .find-someone input::placeholder {
+    color: #425A70;
+    opacity: 0.47;
+    font-size: 12px;
+}
+
+.filter-check .check-box {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filter-check .check-box input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    display: inline-block;
+}
+
+.filter-check .checkmark {
+    position: absolute;
+    top: 0;
+    right: -40px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(67, 90, 111,.16);
+    box-shadow: inset 0px -1px 1px 0px rgba(67, 90, 111,.09)
+}
+
+
+.filter-check .check-box input:checked~.checkmark {
+    background: linear-gradient(360deg, #116AB8 0%, #0788DE 100%);
+}
+
+.filter-check .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.filter-check .check-box input:checked~.checkmark:after {
+    width: 7px;
+    background: #fff;
+    height: 7px;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
+.filter-check.check-box .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.filter-check {
+    margin-top: 30px;
+    margin-left: 15px;
+}
+
+.filter-check .filter {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+/* OVERVIEW RIGHT SIDE */
+
+.right-side {
+    border-right: 1px solid #ddd;
+    /*margin-left: 40px;*/
+}
+
+.daydate-area {
+    border-bottom: 1px solid #ddd;
+    align-content: center;
+    text-align: center;
+}
+
+.header-timeline {
+    text-align: center;
+    align-content: center;
+    padding: 10px 0;
+    padding-bottom: 0px;
+}
+
+.header-timeline .day {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #374FFF;
+}
+
+.header-timeline .date {
+    width: 41px;
+    height: 41px;
+    left: 335px;
+    top: 127px;
+    background: #374FFF;
+    border-radius: 12px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 41px;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.header-timeline p {
+    font-weight: 500;
+    font-size: 12px;
+    color: #66788A;
+    margin-top: 10px;
+}
+
+.header-timeline p span {
+    background: #D4EEE2;
+    border-radius: 6px;
+    padding: 0px 8px;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #47B881;
+    display: inline-block;
+}
+.timeline-border {
+    border-right: 1px solid #ddd;
+}
+
+.client-list {
+    padding-left: 10px;
+}
+
+.client-item{
+    display: flex;
+    justify-content: flex-start;
+    padding: 2px 5px;
+}
+.client-item p.name {
+    margin-bottom: 0;
+    color: #425A70;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 9px;
+}
+.client-item .client-img {
+    margin-right: 7px;
+}
+.client-item p.sub-title {
+    font-size: 12px;
+    margin-bottom: 0;
+    color: #78899A;
+}
+.client-item p.sub-title img {
+    display: inline-block;
+    margin-right: 1px;
+}
+
+.client-item .img img {
+    display: inline-block;
+    width: 20px;
+}
+
+.client-bottom {
+    text-align: center;
+}
+.client-bottom a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 8px;
+    margin: 0px 8px;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input {
+    margin-bottom: 10px !important;
+}
+
+.input-bottom {
+    margin-bottom: 50px !important;
+}
+
+.client-item p.sub-title img {
+    display: inline-block;
+    margin-right: 1px;
+}
+
+.client-item .img img {
+    display: inline-block;
+    width: 20px;
+}
+
+.client-bottom a:first-child {
+    /*border: 1px solid rgba(67, 90, 111,0.14);*/
+    background: rgba(66, 90, 112, 0.06);
+}
+
+.client-bottom a:last-child {
+    background: rgba(66, 90, 112, 0.06);
+}
+
+.client-bottom a img {
+    display: inline-block;
+    width: 30px;
+}
+
+.client-fixed {
+    border-top: 1px solid #ddd;
+}
+
+.client-office {
+	bottom: 0;
+	background: #fff;
+	width: 15%;
+	padding: 8px 0px;
+}
+
+/*===========================================================================*/
+/*  CALENDAR WITHIN OVERVIEW */
+/*===========================================================================*/
+
+.datecal {
+    margin-top: 20px;
+}
+
+.calendar-today {
+    background-color: #b0b8ef;
+}
+
+.calendar_weekday_header {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.sun.sat {
+    color: #425A70;
+}
+
+table.month {
+    margin-left: 15px;
+}
+/*.jquery-calendar {*/
+/*	padding: 0 20px;*/
+/*	margin-bottom: 35px;*/
+/*}*/
+
+/*.babu {*/
+/*    display: none;*/
+/*}*/
+
+/*.shepa {*/
+/*    color: #234361;*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    margin: 0;*/
+/*    line-height: 1;*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*}*/
+
+.todays {
+    color: #425A70;
+    font-size: 13px;
+    border:0;
+    outline: none;
+    background: rgba(66, 90, 112, 0.06);
+    border-radius: 7px;
+    padding: 9px 28px;
+}
+
+
+.ic-arrow-angle-left {
+    border:0;
+    outline: none;
+    background: none;
+    position: absolute;
+    top: 25px;
+    padding: 0;
+}
+
+.ic-arrow-angle-right {
+    border:0;
+    outline: none;
+    background: none;
+    position: absolute;
+    left: 60px;
+    top: 25px;
+}
+
+.month-days tr td {
+    position: relative;
+}
+
+.month-days tr td:after {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    border-radius: 50%;
+}
+
+
+/*===========================================================================*/
+/*  ORGANIZATION SETUP */
+/*===========================================================================*/
+
+.progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    margin-top: 20px;
+    background-color: #3C4EF5;
+}
+
+/*===========================================================================*/
+/*  OFFICE SETUP */
+/*===========================================================================*/
+
+.office-setup-form-div .form-control .custom-select{
+    display: inline-block;
+    width: auto;
+}
+
+.office-setup-form-div .form-control label{
+    display: block;
+}
+
+
+/* ########## Custom css */
+.c-form-radius{
+    border-radius: 8px !important;
+}
+.c-btn-default{
+    color: #868383;
+    background-color: #dae0dc;
+    border-color: #dae0dc;
+}
+.c-btn-size{
+    height: 45px;
+   padding: 0 179px;
+   margin-bottom:20px;
+}
+.del-btn{
+    color:rgb(100, 100, 100);
+}

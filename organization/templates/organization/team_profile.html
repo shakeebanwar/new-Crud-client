@@ -1,0 +1,82 @@
+{% extends "overview/base_general.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="container div-top-margin-25">
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 text-center">
+                <div>
+                    <div class="row justify-content-center align-middle">
+                            <div class="icon-square">
+                                    <i class="bi bi-gear-fill"></i>
+                            </div>
+                    </div>
+                    <header class="mb-4 form-heading">Workspace Settings</header>
+                    <div class="pb-4 div-nab-tab">
+                            <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <li class="nav-item nav-settings">
+                                <a class="nav-link"  href="{% url 'organization_profile' %}"><i class="bi bi-house-fill i-nav"></i>Company</a>
+                              </li>
+                              <li class="nav-item nav-settings">
+                                <a class="nav-link" href="{% url 'office_profile' %}"><i class="bi-geo-alt-fill i-nav"></i>Offices</a>
+                              </li>
+                              <li class="nav-item nav-settings">
+                                <a class="nav-link active" id="nav-active" aria-current="page" href="{% url 'team_profile' %}"><i class="bi bi-people-fill i-nav"></i>Team</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-lightning-charge-fill i-nav"></i>Rules</a>
+                              </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center px-4">
+            <div class="col-sm-12 col-md-8 col-lg-6 text-center">
+                <div class="row">
+                    <div class="col-sm">
+                        <form class="form-signin" method="post">{% csrf_token %}
+
+                            {#                        <h1 class="h3 mb-3 font-weight-normal">Office</h1>#}
+
+                            {#                        Placeholder for Office #}
+                            <legend class="mb-1 form-label" for="inputEmail">Office Location</legend>
+                            <input type="text" name="email" id="inputEmail" class="form-control"
+                                               placeholder="Office Location" required
+                                               autofocus value={{ user_form.initial.email }}>
+                        </form>
+                    </div>
+{#            <div class="col-md-3 text-center">#}
+{#                <div class="content-section">#}
+                    {#                    <h1 class="h3 mb-3 font-weight-normal">asdfasf</h1>#}
+{#                    <form class="form-signin" method="post">{% csrf_token %}#}
+                        {#                        Placeholder for Office #}
+{#                        <label for="inputEmail">Office Location</label>#}
+{#                        <input type="email" name="email" id="inputEmail" class="form-control"#}
+{#                               placeholder="Office Location" required#}
+{#                               autofocus value={{ user_form.initial.email }}>#}
+{#                </div>#}
+{#            </div>#}
+                    <div class="col-sm-4">
+                        {#                    <h1 class="h3 mb-3 font-weight-normal">asdfasf</h1>#}
+                        <form class="form-signin" method="post">{% csrf_token %}
+                            {#                        Placeholder for Office #}
+                            <legend class="mb-1 form-label" for="inputEmail">Office Capacity</legend>
+                            <select class="1-100 custom-select"></select>
+                            {#                            <option selected>Open this select menu</option>#}
+                            {#                            <option value="1">One</option>#}
+                            {#                            <option value="2">Two</option>#}
+                            {#                            <option value="3">Three</option>#}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock content %}

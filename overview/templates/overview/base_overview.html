@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Effortless workplace coordination for hybrid teams">
+    <meta name="author" content="Floq">
+
+    <!-- Title of Website -->
+    {% if title %}
+        <title>Floq - {{ title }}</title>
+    {% else %}
+        <title>Floq</title>
+    {% endif %}
+
+    <!-- FavIcon -->
+    <link rel="icon" type="image/png" href="{% static 'overview/img/favicon.ico' %}"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+
+    {#    <!-- Google Sign-In API -->#}
+    {#    <meta name="google-signin-scope" content="profile email">#}
+    {#    <meta name="google-signin-client_id"#}
+    {#          content="482446593201-vth30udiolqpeiuqntolassv2nns0ai2.apps.googleusercontent.com">#}
+    {#    <!-- TODO: fix google login at the end  -->#}
+    {#    <script src="https://apis.google.com/js/platform.js" async defer></script>#}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LD8WLE6QZM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-LD8WLE6QZM');
+    </script>
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'overview/css/main.css' %}">
+
+    {% block head %}
+
+    {% endblock %}
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="nav">
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand mr-auto" href="{% url 'overview' year=today.year month=today.month day=today.day %}">
+                        <img src="{% static 'overview/img/Floq_Logo.png' %}" alt="Floq Logo" width="85px"> </a>
+                {% else %}
+                    <a class="navbar-brand mr-auto" href="{% url 'landingpage' %}">
+                        <img src="{% static 'overview/img/Floq_Logo.png' %}" alt="Floq Logo" width="85px"> </a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a class="nav-link justify-content-end navbar-custom" href="{% url 'overview' year=today.year month=today.month day=today.day %}">Overview</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLidnk" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Settings</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'user_profile' %}">Profile Settings</a>
+                            {% if user.is_staff %}
+                                <a class="dropdown-item" href="{% url 'organization_profile' %}">Workplace Settings</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <a class="nav-link justify-content-end navbar-custom" href="{% url 'logout' %}">Logout-></a>
+
+                {% else %}
+                    <!-- TODO: Build about and why floq page age -->
+                    <a class="nav-link justify-content-end navbar-custom" href="#">Why floq</a>
+                    <a class="nav-link justify-content-end navbar-custom" href="#">About us</a>
+                    <a class="nav-link justify-content-end navbar-custom" href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+    {% block content %}
+
+
+
+
+    {% endblock %}
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <!-- Fontawesome Script -->
+    <script src="https://kit.fontawesome.com/7749c9f08a.js"></script>
+
+    <!-- Custom jQuery -->
+    <script src="{% static 'overview/js/scripts.js' %}"></script>
+
+    <!-- Scroll-Top button -->
+    <a href="#" class="scrolltotop"><i class="fas fa-angle-up"></i></a>
+
+{% block script %}
+
+{% endblock %}
+
+{#    <script>#}
+{#        $('.myCalendar').calendar({#}
+{#            //var test = 1616108400000#}
+{#            date: new Date(),#}
+{#            autoSelect: true, // false by default#}
+{#            select: function (date) {#}
+{##}
+                {#// Define day1#}
+                {#var day1 = date#}
+                {##}
+                {#// Date#}
+                {#document.getElementById("date-span-1").innerHTML = day1.toLocaleString("en-US", {day: "numeric"});#}
+                {#// Weekday#}
+                {#document.getElementById("weekday-span-1").innerHTML = day1.toLocaleString("en-US", {weekday: "short"});#}
+                {##}
+                {#// Date#}
+                {#var day2 = date.setDate(date.getDate() + 1);#}
+                {#const day2_mid = new Date(day2)#}
+                {#document.getElementById("date-span-2").innerHTML = day2_mid.toLocaleString("en-US", {day: "numeric"});#}
+                {#// Weekday#}
+                {#document.getElementById("weekday-span-2").innerHTML = day2_mid.toLocaleString("en-US", {weekday: "short"});#}
+                {##}
+                {#// Date#}
+                {#var day3 = date.setDate(date.getDate() + 1);#}
+                {#const day3_mid = new Date(day3)#}
+                {#document.getElementById("date-span-3").innerHTML = day3_mid.toLocaleString("en-US", {day: "numeric"});#}
+                {#// Weekday#}
+                {#document.getElementById("weekday-span-3").innerHTML = day3_mid.toLocaleString("en-US", {weekday: "short"});#}
+                {##}
+                {#// Date#}
+                {#var day4 = date.setDate(date.getDate() + 1);#}
+                {#const day4_mid = new Date(day4)#}
+                {#document.getElementById("date-span-4").innerHTML = day4_mid.toLocaleString("en-US", {day: "numeric"});#}
+                {#// Weekday#}
+                {#document.getElementById("weekday-span-4").innerHTML = day4_mid.toLocaleString("en-US", {weekday: "short"});#}
+                {##}
+                {#// Date#}
+                {#var day5 = date.setDate(date.getDate() + 1);#}
+                {#const day5_mid = new Date(day5)#}
+                {#document.getElementById("date-span-5").innerHTML = day5_mid.toLocaleString("en-US", {day: "numeric"});#}
+                {#// Weekday#}
+                {#document.getElementById("weekday-span-5").innerHTML = day5_mid.toLocaleString("en-US", {weekday: "short"});#}
+                {##}
+                {#var day1_mid = date.setDate(date.getDate() - 4);#}
+                {#day1_new = new Date(day1_mid)#}
+                {##}
+                {##}
+                {#function dateToYMD(date) {#}
+                {#    var d = date.getDate();#}
+                {#    var m = date.getMonth() + 1; //Month from 0 to 11#}
+                {#    var y = date.getFullYear();#}
+                {##}
+                {#    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);#}
+
+                    {##}
+                    {#var day1_django = dateToYMD(day1_new); // Nov 5#}
+                    {#console.log(day1_django)#}
+                    {#console.log(day1_mid)#}
+{##}
+                    {#// ajax from JS to Django works#}
+                    {#$(document).ready(function () {#}
+                    {#    $.ajax({#}
+                    {#        url: '',#}
+                    {#        type: 'get',#}
+                    {#        data: {#}
+                    {#            day: day1_django,#}
+                    {#        },success: function (response) {#}
+                    {#            //var bookings = response.data['bookings'];#}
+                    {#            //var offices = response.data['offices'];#}
+                    {#            //console.log(bookings);#}
+                    {#            //console.log(offices);#}
+                    {#            //alert(response['context'])#}
+                    {#            //$(".client-list").html("<b>response['context']</b>");#}
+                    {#            //$(".client-list").append(response['context']);#}
+                    {#        }#}
+                    {#    });#}
+
+{#                }#}
+{#            ,#}
+{#                toggle: function (y, m) {#}
+                    {#console.log('TOGGLE', y, m)#}
+{#                }#}
+{#            });#}
+
+{#        // Code to make a tags with class "submit" act like submit buttons#}
+{#        // see here: https://stackoverflow.com/questions/22902342/how-to-give-a-html-a-tag-act-as-a-submit-button#}
+{#        //$(document).ready(function () {#}
+{#        //    $("a.submit").click(function () {#}
+{#        //        document.getElementById("myForm").submit();#}
+{#        //    });#}
+{#        //});#}
+{##}
+{#        // YOutube tutorial: https://www.youtube.com/watch?v=KgnPSmrQrXI#}
+        {#$(document).on('save', '#new_booking', function (e) {#}
+        {#        e.preventDefault();#}
+        {##}
+        {#        $.ajax({#}
+        {#            type: 'POST',#}
+        {#            url: '/overview',#}
+        {#            data: {#}
+        {#                id: 1,#}
+        {#                booking_time: '2017-03-20',#}
+        {#                location: 'H',#}
+        {#                account_id: 1,#}
+        {#                organization_id: 1,#}
+        {#                office_id: 1,#}
+        {#                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()#}
+        {#            },#}
+        {#            success:function () {#}
+        {#                alert('Booking created')#}
+        {#            }#}
+        {##}
+        {#            }#}
+        {#        });#}
+{#    </script>#}
+
+</body>
+</html>

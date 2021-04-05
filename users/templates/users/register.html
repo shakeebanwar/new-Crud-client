@@ -1,0 +1,74 @@
+{% extends "overview/../../../overview/templates/overview/../../../overview/templates/overview/base_general.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="introducing-row">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="content-section">
+
+                    <form class="form-signin" method="post">
+                        {% csrf_token %}
+                        <legend class="border-bottom mb-4">Register for Floq</legend>
+
+                        <input type="email" name="email" id="inputEmail" class="form-control"
+                               placeholder="Email address" required autofocus>
+
+                        <input type="text" name="first_name" id="inputFirst_name" class="form-control"
+                               placeholder="First name" required>
+
+                        <input type="text" name="last_name" id="inputLast_name" class="form-control"
+                               placeholder="Last name" required>
+
+                        <input type="password" name="password1" id="inputPassword1" class="form-control"
+                               placeholder="Password" required>
+
+                        <input type="password" name="password2" id="inputPassword2" class="form-control"
+                               placeholder="Confirm password" required>
+
+                        {% for field in registration_form %}
+                            <p>
+                                {% for error in field.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                {% endfor %}
+                            </p>
+                        {% endfor %}
+                        {% if registration_form.non_field_errors %}
+                            <div style="color: red">
+                                <p>{{ registration_form.non_field_errors }}</p>
+                            </div>
+
+                        {% endif %}
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+                    </form>
+
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                        </small>
+                    </div>
+
+
+                    {#                    <form method="POST">#}
+                    {#                        {% csrf_token %}#}
+                    {#                        <fieldset class="form-group">#}
+                    {#                            <legend class="border-bottom mb-4">Register for Floq</legend>#}
+                    {#                            {{ form|crispy }}#}
+                    {#                        </fieldset>#}
+                    {#                        <div class="form-group">#}
+                    {#                            <button class="btn btn-primary" type="submit">Sign Up</button>#}
+                    {#                        </div>#}
+                    {#                    </form>#}
+                    {#                    <div class="border-top pt-3">#}
+                    {#                        <small class="text-muted">#}
+                    {#                            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>#}
+                    {#                        </small>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

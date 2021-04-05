@@ -1,0 +1,38 @@
+-- SOME SCRIPTS TO FILL THE DB FOR TESTING
+
+
+ -- Organization table
+INSERT INTO organization_organization VALUES
+    (1, 'Test AG');
+
+     -- Organization table
+INSERT INTO organization_organization VALUES
+    (2, 'Test GmbH');
+
+-- update org id in user field
+UPDATE users_account SET organization_id = 1 WHERE organization_id IS NULL;
+
+ -- Office table
+ INSERT INTO organization_office VALUES
+    (1, 'Office 1', 'Lenzburg', 1, 11);
+
+
+-- inserting into bookings
+ INSERT INTO overview_booking (id, booking_time, location, account_id, organization_id, office_id)
+    VALUES (1, '2017-03-15','H',1, 1, 1);
+
+
+     -- Organization table
+INSERT INTO organization_organization VALUES
+    (2, 'Test GmbH');
+
+    -- update org id in user field
+UPDATE users_account SET organization_id = 2 WHERE organization_id IS NULL;
+
+ -- Office table
+ INSERT INTO organization_office VALUES
+    (2, 'Office Test GmbH', 'Lenzburg', 1, 1);
+
+    -- inserting into bookings
+ INSERT INTO overview_booking (id, booking_time, location, account_id, organization_id, office_id)
+    VALUES (3, '2017-03-15','H',2, 2, 1);

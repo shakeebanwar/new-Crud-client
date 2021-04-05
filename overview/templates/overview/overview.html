@@ -1,0 +1,366 @@
+{% extends "overview/base_overview.html" %}
+
+{% block head %}
+
+
+{% endblock head %}
+
+{% block content %}
+    {% load static %}
+    <div class="main-content">
+        <div class="row">
+            <div class="col-lg-2 left-side">
+                <div class="left-sidebar">
+
+                    <div style="margin-top: 20px;" class="datecal">
+
+                        <div class="container">
+                            <a href="{% url 'overview' year=lastMonth.year month=lastMonth.month day=lastMonth.day %}"
+                               id="prev">
+                                <button class="fas fa-angle-left"></button>
+                            </a>
+
+                            <a href="{% url 'overview' year=nextMonth.year month=nextMonth.month day=nextMonth.day %}"
+                               id="next">
+                                <button class="fas fa-angle-right"></button>
+                            </a>
+
+                            <a href="{% url 'overview' year=today.year month=today.month day=today.day %}"
+                               id="prev">
+                                <button class="todays">Today</button>
+                            </a>
+                        </div>
+
+                        {{ calendar|safe }}
+
+                    </div>
+
+                    <div class="row">
+                        <form> {% csrf_token %}
+
+                            <div class="find-someone col-sm-9">
+                                <input type="text" placeholder="Find Someone" id="search-field">
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="fas fa-search" type="submit"></button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="filter-check">
+                    <span class="filter"> Filter</span>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="everyone-radio" value="Everyone">
+                        <label class="form-check-label" for="flexRadioDefault1">Everyone 🌍</label>
+                    </div>
+                    {% for office in offices %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                   id="flexRadioDefault2"
+                                   value="{{ office.office_name }}">
+                            {% if office.office_name == "Home Office" %}
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                {{ office.office_name }} 🏠
+                            {% else %}
+                                {{ office.office_name }} 🏢
+                            {% endif %}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                               value="Afi">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Not indicated🤔
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="you-radio"
+                               value="{{ request.user.id }}">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            You🤩
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- right side -->
+            <div class="col-md-2 right-side">
+                <div class="main-body">
+                    <div class="header-timeline">
+                        <span class="day" id="weekday-span-1">{{ day1| date:"D" }}</span>
+                        <span class="date" id="date-span-1">{{ day1| date:"d" }} </span>
+                    </div>
+
+                    <div class="client-list">
+                        {% for office in offices %}
+                            <!-- Naming offices incl. remaining spots -->
+                            {% for spots_with_booking in spots_with_bookings1 %}
+                                {% if spots_with_booking.office_id == office.id %}
+                                    <!-- Home Office should not show capacity -->
+                                    {% if spots_with_booking.office_id == 1 %}
+                                        <p>🏠 {{ spots_with_booking.office__office_name }} </p>
+                                    {% else %}
+                                        <p>
+                                            🏢 {{ spots_with_booking.office__office_name }} {{ spots_with_booking.remaining_spots }}/{{ spots_with_booking.office__office_capacity }} </p>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for spots_without_booking in spots_without_bookings1 %}
+                                {% if spots_without_booking.id == office.id %}
+                                    <!-- Home Office should not show capacity -->
+                                    {% if spots_without_booking.id == 1 %}
+                                        <p>🏠 {{ spots_without_booking.office_name }} </p>
+                                    {% else %}
+                                        <p>
+                                            🏢 {{ spots_without_booking.office_name }} {{ spots_without_booking.office_capacity }}/{{ spots_without_booking.office_capacity }} </p>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <!-- Showing bookings for offices that have bookings -->
+                            {% for booking in bookings1 %}
+                                {% if booking.office.office_name ==  office.office_name %}
+                                    <div class="client-item">
+                                        <div class="client-text">
+                                            <small class="name {% if booking.office.id == 1 %}home-office-user-element{% else %}office-user-element{% endif %}">{{ booking.account.first_name }} {{ booking.account.last_name }}
+                                                {% if booking.get_location_display == 'Office' %}
+                                                    🏢
+                                                {% elif booking.get_location_display == 'Home Office' %}
+                                                    🏠
+                                                {% endif %}</small>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        <!-- Showing employees that have not booked yet -->
+                        {% if non_bookings1 %}
+                            <p>🤔 Not indicated</p>
+                        {% endif %}
+                        {% for non_booking1 in non_bookings1 %}
+                            <div class="client-item">
+                                <div class="client-text">
+                                    <small class="name not-indicated-user-element">{{ non_booking1.first_name }} {{ non_booking1.last_name }}
+                                        🤔</small>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="client-fixed">
+                        <div class="client-office">
+                            <form method="post"
+                                    {#                                  action="{% url 'overview' year=day1.year month=day1.month day=day1.day %}"> {% csrf_token %}#}
+                                  action="."> {% csrf_token %}
+                                <select class="form-select" id="location-select1" name="booking_selection_1"
+                                        aria-label="Default select example">
+                                    {% if current_location1 %}
+                                        {% if current_location1.not_indicated == 'Not indicated' %}
+                                            <option value="{{ current_location1.not_indicated }}"
+                                                    selected>🤔 {{ current_location1.not_indicated }}</option>
+                                        {% else %}
+                                            {% for current_selection in current_location1 %}
+                                                {% if current_selection.office_name == 'Home Office' %}
+                                                    <option value="{{ current_selection.id }}"
+                                                            selected>🏠 {{ current_selection.office_name }}</option>
+                                                {% else %}
+                                                    <option value="{{ current_selection.id }}"
+                                                            selected>🏢 {{ current_selection.office_name }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                    {% for other_location in other_locations1 %}
+                                        {% if other_location.office_name == 'Home Office' %}
+                                            <option value="{{ other_location.id }}">
+                                                🏠 {{ other_location.office_name }}</option>
+                                        {% else %}
+                                            <option value="{{ other_location.id }}">
+                                                🏢 {{ other_location.office_name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <input type="hidden" name="myinput" value="0"/>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2nd day -->
+            <div class="col-md-2 right-side">
+                <div class="main-body">
+                    <div class="header-timeline">
+                        <span class="day" id="weekday-span-1">{{ day2| date:"D" }}</span>
+                        <span class="date" id="date-span-1">{{ day2| date:"d" }} </span>
+                    </div>
+
+                    <div class="client-list">
+                        {% for office in offices %}
+                            <small>{{ office.office_name }}</small><br>
+                            {% for booking in bookings2 %}
+                                {% if booking.office.office_name ==  office.office_name %}
+                                    <div class="client-item">
+                                        <div class="client-text">
+                                            <p class="name">{{ booking.account.first_name }} {{ booking.account.last_name }}
+                                                {% if booking.get_location_display == 'Office' %}
+                                                    🏢
+                                                {% elif booking.get_location_display == 'Home Office' %}
+                                                    🏠
+                                                {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if non_bookings2 %}
+                            <small>Not indicated</small><br>
+                        {% endif %}
+                        {% for non_booking in non_bookings2 %}
+                            <div class="client-item">
+                                <div class="client-text">
+                                    <p class="name">{{ non_booking.first_name }} {{ non_booking.last_name }}
+                                        🤔</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="client-fixed">
+                        <div class="client-office">
+                            <form method="post"
+                                    {#                                  action="{% url 'overview' year=day1.year month=day1.month day=day1.day %}"> {% csrf_token %}#}
+                                  action="."> {% csrf_token %}
+                                <select class="form-select" id="location-select2" name="booking_selection_1"
+                                        aria-label="Default select example">
+                                    {% if current_location2 %}
+                                        {% if current_location2.not_indicated == 'Not indicated' %}
+                                            <option value="{{ current_location2.not_indicated }}"
+                                                    selected>{{ current_location2.not_indicated }}</option>
+                                        {% else %}
+                                            {% for current_selection in current_location2 %}
+                                                <option value="{{ current_selection.id }}"
+                                                        selected>{{ current_selection.office_name }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                    {% for other_location in other_locations2 %}
+                                        <option value="{{ other_location.id }}">{{ other_location.office_name }}</option>
+                                    {% endfor %}
+                                    <input type="hidden" name="myinput" value="0"/>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block script %}
+
+    <script>
+        
+        //var url = "overview/{{day1.year}}/{{ day1.month }}/{{ day1.day }}/";
+        var csrf = $("[name=csrfmiddlewaretoken]").val();
+        $('#location-select1').on('change', function () {
+            var location_selection1 = this.value;
+            console.log(location_selection1)
+
+
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: {
+                    office_id1: location_selection1, // TODO adjust with office that is selected
+                    csrfmiddlewaretoken: csrf
+                },
+            });
+            window.location.reload();
+        });
+
+
+        $('#location-select2').on('change', function () {
+            var location_selection2 = this.value;
+            console.log(location_selection2)
+
+
+            $.ajax({
+                url: '',
+                type: 'POST',
+                data: {
+                    office_id2: location_selection2, // TODO adjust with office that is selected
+                    csrfmiddlewaretoken: csrf
+                },
+            });
+            window.location.reload();
+        });
+        
+
+    </script>
+
+    <script>
+        $('input[type="radio"][id=you-radio]').change(function () {
+            var value = this.value;
+            console.log(value)
+            localStorage['my.checkbox'] = this.checked;
+            var url = window.location.href;
+            var new_url = url + value;
+            window.location.replace(new_url)
+        });
+
+    </script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+        //  AutoComplete for Search Bar
+        $(function () {
+            $("#search-field").autocomplete({
+                source: "{% url 'overview' year=day1.year month=day1.month day=day1.day %}"
+            });
+        });
+    </script>
+
+    <script>
+        // Storing Button State of Radio Buttons in localStorage to keep them after reloading
+        $(document).ready(function () {
+
+            // Function to make Everyone radio button checked on page load
+            $(function () {
+                var $radios = $('input:radio[name=flexRadioDefault]');
+                if ($radios.is(':checked') === false) {
+                    $radios.filter('[value=Everyone]').prop('checked', true);
+                }
+            });
+
+            // Function to store every other button state in the localStorage
+            var radios = document.getElementsByName("flexRadioDefault");
+            var val = localStorage.getItem('flexRadioDefault');
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].value == val) {
+                    radios[i].checked = true;
+                }
+            }
+            $('input[name="flexRadioDefault"]').on('change', function () {
+                localStorage.setItem('flexRadioDefault', $(this).val());
+
+            });
+        });
+    </script>
+
+{% endblock script %}
